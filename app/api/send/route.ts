@@ -5,8 +5,8 @@
         const body = await req.json();
         const transporter = nodemailer .createTransport({
             service: "gmail",auth: {
-                user: "ditiendrit405@gmail.com",
-                pass:"otjh yfdd woqs bnzf",
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS,
             },
         });
         await transporter.sendMail({
