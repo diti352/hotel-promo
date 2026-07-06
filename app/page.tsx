@@ -86,25 +86,28 @@ useEffect(() => {
         duration-700 hover:scale-105">Luxury Accommodations</h2>
 
         <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
-          {[
-            ["room1.jpg", "Deluxe Room", "129€ / Night"],
-            ["room2.jpg", "Sea View Suite", " 189€ / Night"],
-            ["room3.jpg", "Premium Villa", "299€ / Night"],
-          ].map(([img, title, price]) => (
-            <div key={title} className="overflow-hidden rounded-3xl border border-zinc-700 bg-zinc-800 shadow-xl transition-all
-            duration-300 hover:-translate-y-2 hover:border-yellow-400 hover:shadow-2xl">
-              <img src={`/${img}`} className="h-64 w-full object-cover transition duration-700 hover:scale-110 hover:brightness-110" />
-              <div className="p-6">
-                <h3 className="text-2xl font-bold">{title}</h3>
-                <p className="mt-2 text-zinc-400">Pamje nga deti - WiFi - Ballkon</p>
-                <p className="mt-4 text-2xl font-bold text-yellow-400">{price}</p>
-                <a href="#kontakt" className="mt-4 block w-full rounded-full bg-yellow-400 py-3 text-center font-bold text-black transition-all
-                duration-300 hover:bg-yellow-300 hover:scale-105">
-                  Rezervo tani
-                </a>
-              </div>
-            </div>
-          ))}
+  {[
+    ["room1.jpg", "Deluxe Room", "129€ / Night", "King bed • WiFi • Breakfast"],
+    ["room2.jpg", "Sea View Suite", "189€ / Night", "Sea view • Balcony • Pool access"],
+    ["room3.jpg", "Premium Villa", "299€ / Night", "Private villa • Jacuzzi • VIP service"],
+  ].map(([img, title, price, features]) => (
+    <div key={title} className="group overflow-hidden rounded-3xl border border-zinc-700 bg-zinc-900 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-yellow-400 hover:shadow-yellow-400/20">
+      <img src={`/${img}`} className="h-64 w-full object-cover transition duration-700 group-hover:scale-110" />
+
+      <div className="p-6">
+        <div className="mb-3 text-yellow-400">★★★★★</div>
+        <h3 className="text-2xl font-bold">{title}</h3>
+        <p className="mt-3 text-zinc-300">{features}</p>
+
+        <div className="mt-6 flex items-center justify-between">
+          <p className="text-xl font-bold text-yellow-400">{price}</p>
+          <a href="#kontakt" className="rounded-full bg-yellow-400 px-5 py-3 font-bold text-black transition hover:bg-yellow-300 hover:scale-105">
+            Book Now
+          </a>
+        </div>
+      </div>
+    </div>
+  ))}
         </div>
       </section>
 
