@@ -23,7 +23,7 @@ useEffect(() => { const interval = setInterval(() =>
 {
   setHeroIndex((current) =>
   (current + 1) % heroImages.length);
-}, 4000);
+}, 5000);
 return() => 
 clearInterval(interval);
 }, []);
@@ -57,8 +57,8 @@ clearInterval(interval);
     <main className="min-h-screen bg-black text-white">
       <nav className={`fixed top-0 z-50 flex w-full items-center justify-between border-b px-8 py-5 backdrop-blur-xl transition-all duration-300 ${
   scrolled
-    ? "border-white/10 bg-black/90 shadow-xl"
-    : "border-white/5 bg-black/30"
+    ? "border-white/10 bg-black/70 shadow-2xl backdrop-blur-xl"
+    : "border-white/5 bg-black/20 backdrop-blur-md"
 }`}>
         <h1 className="text-2xl font-extrabold tracking-[0.3em] text-yellow-400">LUXURY HOTEL</h1>
         <div className="hidden gap-8 md:flex">
@@ -73,8 +73,9 @@ clearInterval(interval);
       </nav>
 
       <section id="home" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
-        <img src={heroImages[heroIndex]}
-        className="absolute inset-0 h-full w-full odject-cover"
+         <img key={heroIndex}src={heroImages[heroIndex]}
+        className="absolute inset-0 h-full w-full object-cover transition-all 
+        duration-[5000ms] ease-in-out scale-105"
         alt="Luxury Hotel"/>
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="relative z-10 flex flex-col items-center text-center px-6">
@@ -148,7 +149,7 @@ clearInterval(interval);
           >
             <img
             src={selectedImage}
-            className="max-h-[90vh]max-w-[90vw] rounded-3xl border border-yellow-400 object-contain"
+            className="max-h-[90vh] max-w-[90vw] rounded-3xl border border-yellow-400 object-contain"
             />
           </div>
       )}
@@ -206,7 +207,7 @@ clearInterval(interval);
   </h2>
 
   <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
-    <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-8 transition-all duration-500 hover:-translate-y-33 hover:border-yellow-400 hover:shadow-2xl">
+    <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-8 transition-all duration-500 hover:-translate-y-3 hover:border-yellow-400 hover:shadow-2xl">
       <p className="mb-4 text-yellow-400 text-xl">★★★★★</p>
       <p className="text-zinc-300">
         “An unforgettable stay with beautiful views and excellent service.”
@@ -219,7 +220,7 @@ clearInterval(interval);
       </div>
     </div>
 
-    <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-8 transition-all duration-500 hover:-translate-y-33 hover:border-yellow-400 hover:shadow-2xl">
+    <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-8 transition-all duration-500 hover:-translate-y-3 hover:border-yellow-400 hover:shadow-2xl">
       <p className="mb-4 text-yellow-400 text-xl">★★★★★</p>
       <p className="text-zinc-300">
         “The rooms were elegant, clean and the staff was incredibly kind.”
@@ -227,7 +228,7 @@ clearInterval(interval);
       <h3 className="mt-6 font-bold text-white">— Daniel R.</h3>
     </div>
 
-    <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-8 transition-all duration-500 hover:-translate-y-33 hover:border-yellow-400 hover:shadow-2xl">
+    <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-8 transition-all duration-500 hover:-translate-y-3 hover:border-yellow-400 hover:shadow-2xl">
       <p className="mb-4 text-yellow-400 text-xl">★★★★★</p>
       <p className="text-zinc-300">
         “A premium experience from arrival to checkout. Highly recommended.”
