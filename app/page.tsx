@@ -114,13 +114,17 @@ useEffect(() => {
       <section id="galeria" className="bg-black px-6 py-24">
         <h2 className="mb-12 text-center text-5xl font-bold transition-all duration-700 hover:scale-105">Gallery Highlights</h2>
         <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
-          <img src="/room1.jpg" className="h-80 w-full rounded-3xl border border-zinc-700 object-cover shadow-xl transition-all
-           duration-700 hover:scale-105 hover:border-yellow-400 hover:brightnes-110" />
-          <img src="/room2.jpg" className="h-80 w-full rounded-3xl border border-zinc-700 object-cover shadow-xl transition-all 
-          duration-700 hover:scale-105 hover:border-yellow-400 hover:brightnes-110 " />
-          <img src="/room3.jpg" className="h-80 w-full rounded-3xl border border-zinc-700 object-cover shadow-xl transition-all
-           duration-700 hover:scale-105 hover:border-yellow-400 hover:brightnes-110" />
+         {["room1.jpg", "room2.jpg", "room3.jpg"] .map((img) => (
+          <div
+          key={img}
+          className="overflow-hidden rounded-3xl border border-zinc-700">
+            <img
+            src={`/${img}`}
+            className="h-80 w-full object-cover transition duration-700 hover:scale-110 hover:brightness-110"
+            />
         </div>
+         ))}
+         </div>
       </section>
       <section className="bg-zinc-950 px-6 py-24">
   <h2 className="mb-12 text-center text-5xl font-bold">
@@ -158,15 +162,20 @@ useEffect(() => {
   </h2>
 
   <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
-    <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-8">
+    <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-8 transition-all duration-500 hover:-translate-y-33 hover:border-yellow-400 hover:shadow-2xl">
       <p className="mb-4 text-yellow-400 text-xl">★★★★★</p>
       <p className="text-zinc-300">
         “An unforgettable stay with beautiful views and excellent service.”
       </p>
-      <h3 className="mt-6 font-bold text-white">— Sarah M.</h3>
+      <div className="mt-6 flex items-center gap-4">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-yellow-400 font-bold text-black">
+          SM
+        </div>
+        <h3 className="font-bold text-white">Sarah M.</h3>
+      </div>
     </div>
 
-    <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-8">
+    <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-8 transition-all duration-500 hover:-translate-y-33 hover:border-yellow-400 hover:shadow-2xl">
       <p className="mb-4 text-yellow-400 text-xl">★★★★★</p>
       <p className="text-zinc-300">
         “The rooms were elegant, clean and the staff was incredibly kind.”
@@ -174,7 +183,7 @@ useEffect(() => {
       <h3 className="mt-6 font-bold text-white">— Daniel R.</h3>
     </div>
 
-    <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-8">
+    <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-8 transition-all duration-500 hover:-translate-y-33 hover:border-yellow-400 hover:shadow-2xl">
       <p className="mb-4 text-yellow-400 text-xl">★★★★★</p>
       <p className="text-zinc-300">
         “A premium experience from arrival to checkout. Highly recommended.”
