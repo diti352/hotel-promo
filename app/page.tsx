@@ -3,6 +3,7 @@ import { useEffect, useState } from
  "react";
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
+  const [selectedImage,setSelectedImage] = useState<string | null>(null);
 
 useEffect(() => {
   const handleScroll = () => {
@@ -92,7 +93,9 @@ useEffect(() => {
     ["room3.jpg", "Premium Villa", "299€ / Night", "Private villa • Jacuzzi • VIP service"],
   ].map(([img, title, price, features]) => (
     <div key={title} className="group overflow-hidden rounded-3xl border border-zinc-700 bg-zinc-900 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-yellow-400 hover:shadow-yellow-400/20">
-      <img src={`/${img}`} className="h-64 w-full object-cover transition duration-700 group-hover:scale-110" />
+      <img
+       src={`/${img}`} 
+       className="h-64 w-full object-cover transition duration-700 group-hover:scale-110" />
 
       <div className="p-6">
         <div className="mb-3 text-yellow-400">★★★★★</div>
@@ -119,13 +122,25 @@ useEffect(() => {
           key={img}
           className="overflow-hidden rounded-3xl border border-zinc-700">
             <img
-            src={`/${img}`}
+            src={`/${img}`} onClick={() => setSelectedImage(`/${img}`)}
             className="h-80 w-full object-cover transition duration-700 hover:scale-110 hover:brightness-110"
             />
         </div>
          ))}
          </div>
       </section>
+      {selectedImage && (
+        <div
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-6"
+        onClick={() => 
+          setSelectedImage(null)}
+          >
+            <img
+            src={selectedImage}
+            className="max-h-[90vh]max-w-[90vw] rounded-3xl border border-yellow-400 object-contain"
+            />
+          </div>
+      )}
       <section className="bg-zinc-950 px-6 py-24">
   <h2 className="mb-12 text-center text-5xl font-bold">
     Why Choose Us
