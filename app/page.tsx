@@ -141,6 +141,24 @@ useEffect(() => {
             />
           </div>
       )}
+      <section className="bg-black px-6 py-20 text-white">
+  <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-4">
+    {[
+      ["250+", "Luxury Rooms"],
+      ["12K+", "Happy Guests"],
+      ["4.9", "Guest Rating"],
+      ["15+", "Years Experience"],
+    ].map(([number, label]) => (
+      <div
+        key={label}
+        className="rounded-3xl border border-zinc-800 bg-zinc-900 p-8 text-center transition-all duration-500 hover:-translate-y-2 hover:border-yellow-400"
+      >
+        <h3 className="text-4xl font-bold text-yellow-400">{number}</h3>
+        <p className="mt-3 text-zinc-300">{label}</p>
+      </div>
+    ))}
+  </div>
+</section>
       <section className="bg-zinc-950 px-6 py-24">
   <h2 className="mb-12 text-center text-5xl font-bold">
     Why Choose Us
