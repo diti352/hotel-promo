@@ -2,10 +2,12 @@
 import { useEffect, useState } from
  "react";
  import Image from "next/image"
- import { MessageCircle, Mail } from "lucide-react";
+ import { MessageCircle, Menu, X, MapPin, Phone, Mail, Camera, } from "lucide-react";
+ import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [selectedImage,setSelectedImage] = useState<string | null>(null);
+  const [mobileMenuOpen,setMobileMenuOpen] = useState(false);
   const heroImages = ["/hero.jpg", "/room2.jpg", "/room3.jpg"];
   const [heroIndex, setHeroIndex] = useState(0)
 
@@ -71,8 +73,21 @@ clearInterval(interval);
         <a href="#kontakt" className="rounded-full bg-yellow-400 px-5 py-2 font-bold text-black">
           Rezervo
         </a>
+        <button
+  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+  className="md:hidden rounded-full border border-white/20 p-2 text-white"
+>
+  {mobileMenuOpen ? <X /> : <Menu />}
+</button>
       </nav>
-
+{mobileMenuOpen && (
+  <div className="fixed left-4 right-4 top-24 z-50 flex flex-col gap-4 rounded-3xl border border-white/10 bg-black/90 p-6 text-center text-white shadow-2xl backdrop-blur-xl md:hidden">
+    <a onClick={() => setMobileMenuOpen(false)} href="#home" className="hover:text-yellow-400">Home</a>
+    <a onClick={() => setMobileMenuOpen(false)} href="#rooms" className="hover:text-yellow-400">Dhomat</a>
+    <a onClick={() => setMobileMenuOpen(false)} href="#galeria" className="hover:text-yellow-400">Galeria</a>
+    <a onClick={() => setMobileMenuOpen(false)} href="#kontakt" className="hover:text-yellow-400">Kontakt</a>
+  </div>
+)}
       <section id="home" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
          <Image key={heroIndex}
          src={heroImages[heroIndex]}
@@ -104,7 +119,7 @@ clearInterval(interval);
         <h2 className="mb-12 text-center text-5xl font-bold transition-all
         duration-700 hover:scale-105">Luxury Accommodations</h2>
 
-        <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
+        <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-1 md:grid-cols-3">
   {[
     ["room1.jpg", "Deluxe Room", "129€ / Night", "King bed • WiFi • Breakfast"],
     ["room2.jpg", "Sea View Suite", "189€ / Night", "Sea view • Balcony • Pool access"],
@@ -292,6 +307,22 @@ clearInterval(interval);
   </div>
 </div>
 </section>
+<section className="bg-zinc-950 px-6 py-20 text-center">
+  <h2 className="text-4xl font-extrabold text-white md:text-5xl">
+    Need a Website Like This for Your Hotel?
+  </h2>
+
+  <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-400">
+    We create modern, premium hotel websites designed to impress guests and increase direct bookings.
+  </p>
+
+  <a
+    href="#kontakt"
+    className="mt-8 inline-block rounded-full bg-yellow-400 px-10 py-4 font-bold text-black transition hover:scale-110 hover:bg-yellow-300"
+  >
+    Contact Us
+  </a>
+</section>
 <footer className="bg-black border-t border-zinc-800 py-10">
   <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
 
@@ -313,10 +344,11 @@ clearInterval(interval);
 
   </div>
   <div className="flex justify-center gap-6 mt-8 text-2xl text-yellow-400">
-  <a href="#" className="hover:scale-125 transition">📘</a>
-  <a href="#" className="hover:scale-125 transition">📷</a>
-  <a href="#" className="hover:scale-125 transition">💬</a>
-  <a href="#" className="hover:scale-125 transition">📧</a>
+  <a href="#" className="hover:scale-125 transition"><FaFacebookF /></a>
+  <a href="#" className="hover:scale-125 transition"><FaInstagram /></a>
+  <a href="#" className="hover:scale-125 transition"><FaTiktok></FaTiktok></a>
+  <a href="#" className="hover:scale-125 transition"><MessageCircle /></a>
+  <a href="#" className="hover:scale-125 transition"><Camera /></a>
 </div>
 
   <p className="text-center text-zinc-500 mt-8 text-sm">
