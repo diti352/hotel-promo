@@ -196,6 +196,29 @@ useEffect(() => {
           </button>
         </form>
       </section>
+      <section id="rooms" className="py-24 px-6 bg-zinc-950 text-white">
+  <div className="max-w-6xl mx-auto">
+    <p className="text-yellow-400 uppercase tracking-[0.3em] text-sm mb-3">Our Rooms</p>
+    <h2 className="text-4xl md:text-5xl font-bold mb-12">Luxury Rooms & Suites</h2>
+
+    <div className="grid md:grid-cols-3 gap-8">
+      {[
+        { img: "/room1.jpg", title: "Deluxe Room", price: "From €120/night" },
+        { img: "/room2.jpg", title: "Premium Suite", price: "From €180/night" },
+        { img: "/room3.jpg", title: "Royal Suite", price: "From €250/night" },
+      ].map((room) => (
+        <div key={room.title} className="bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800">
+          <img src={room.img} alt={room.title} className="h-64 w-full object-cover" />
+          <div className="p-6">
+            <h3 className="text-2xl font-semibold mb-2">{room.title}</h3>
+            <p className="text-zinc-400 mb-4">Elegant comfort, modern design, and a relaxing atmosphere.</p>
+            <p className="text-yellow-400 font-semibold">{room.price}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 <footer className="bg-black border-t border-zinc-800 py-10">
   <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
 
@@ -220,6 +243,7 @@ useEffect(() => {
   <p className="text-center text-zinc-500 mt-8 text-sm">
     © 2026 Luxury Hotel. All rights reserved.
   </p>
+
 </footer>
     </main>
   );
