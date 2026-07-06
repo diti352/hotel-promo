@@ -240,6 +240,34 @@ useEffect(() => {
             Konfirmo Rezervimin
           </button>
         </form>
+        <div className="mx-auto mt-12 max-w-5xl overflow-hidden rounded-3xl border border-zinc-800">
+          <iframe
+          src="https://www.google.com/maps?q=Durres,Albania&output=embed"
+          width="100%"
+          height="450"
+          style={{ border: 0 }}
+          loading="lazy"
+          />
+        </div>
+        <div className="mx-auto mt-10 grid max-w-5xl gap-6 md:grid-cols-3">
+  <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6 text-center">
+    <p className="text-3xl">📍</p>
+    <h3 className="mt-3 font-bold text-yellow-400">Address</h3>
+    <p className="mt-2 text-zinc-300">Beachfront Luxury Location</p>
+  </div>
+
+  <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6 text-center">
+    <p className="text-3xl">☎️</p>
+    <h3 className="mt-3 font-bold text-yellow-400">Phone</h3>
+    <p className="mt-2 text-zinc-300">+355 69 000 0000</p>
+  </div>
+
+  <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6 text-center">
+    <p className="text-3xl">✉️</p>
+    <h3 className="mt-3 font-bold text-yellow-400">Email</h3>
+    <p className="mt-2 text-zinc-300">booking@luxuryhotel.com</p>
+  </div>
+</div>
       </section>
       <section id="rooms" className="py-24 px-6 bg-zinc-950 text-white">
   <div className="max-w-6xl mx-auto">
@@ -284,6 +312,12 @@ useEffect(() => {
     </div>
 
   </div>
+  <div className="flex justify-center gap-6 mt-8 text-2xl text-yellow-400">
+  <a href="#" className="hover:scale-125 transition">📘</a>
+  <a href="#" className="hover:scale-125 transition">📷</a>
+  <a href="#" className="hover:scale-125 transition">💬</a>
+  <a href="#" className="hover:scale-125 transition">📧</a>
+</div>
 
   <p className="text-center text-zinc-500 mt-8 text-sm">
     © 2026 Luxury Hotel. All rights reserved.
