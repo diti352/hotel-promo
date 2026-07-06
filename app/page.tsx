@@ -1,9 +1,12 @@
 "use client";
 import { useEffect, useState } from
  "react";
+ import { MessageCircle, Mail } from "lucide-react";
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [selectedImage,setSelectedImage] = useState<string | null>(null);
+  const heroImages = ["/hero.jpg", "/room2.jpg", "/room3.jpg"];
+  const [heroIndex, setHeroIndex] = useState(0)
 
 useEffect(() => {
   const handleScroll = () => {
@@ -15,6 +18,14 @@ useEffect(() => {
   return () => {
     window.removeEventListener("scroll", handleScroll);
   };
+}, []);
+useEffect(() => { const interval = setInterval(() =>
+{
+  setHeroIndex((current) =>
+  (current + 1) % heroImages.length);
+}, 4000);
+return() => 
+clearInterval(interval);
 }, []);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -62,7 +73,7 @@ useEffect(() => {
       </nav>
 
       <section id="home" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
-        <img src="/hero.jpg"
+        <img src={heroImages[heroIndex]}
         className="absolute inset-0 h-full w-full odject-cover"
         alt="Luxury Hotel"/>
         <div className="absolute inset-0 bg-black/60"></div>
@@ -324,6 +335,13 @@ useEffect(() => {
   </p>
 
 </footer>
+<a
+href="https://wa.me/355690000000"
+target="_blank"
+className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-green-500
+text-2xl shadow-2xl transition hover:scale-110">
+  <MessageCircle/>
+</a>
     </main>
   );
 }
