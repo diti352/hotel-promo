@@ -88,32 +88,105 @@ clearInterval(interval);
     <a onClick={() => setMobileMenuOpen(false)} href="#kontakt" className="hover:text-yellow-400">Kontakt</a>
   </div>
 )}
-      <section id="home" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
-         <Image key={heroIndex}
-         src={heroImages[heroIndex]}
-         alt="Luxury Hotel"
-         fill
-         sizes="100vw"
-         priority
-        className="absolute inset-0 object-cover transition-all 
-        duration-[5000ms] ease-in-out scale-105"/>
-        alt="Luxury Hotel"
-        <div className="absolute inset-0 bg-black/60"></div>
-        <div className="relative z-10 flex flex-col items-center text-center px-6">
-        <p className="mb-4 text-sm uppercase tracking-[0.4em] text-yellow-400">Luxury Hotel</p>
-        <h2 className="max-w-4xl text-center text-4xl font-extrabold leading-tight md:text-6xl">
-          Where Luxury Meets Serenity
-        </h2>
-        <p className="mt-6 max-w-2xl text-xl text-white">
-          Trusted by thousand of guests seeking comfort, 
-          elegance, and unforgettable experiences.
-        </p>
-        <a href="#kontakt" className="mt-8 rounded-full bg-yellow-400 px-10 py-4 text-lg font-bold text-black
-        transition-all duration-300 hover:bg-yellow-300 hover:scale-110 hover:shadow-2xl">
-          Rezervo Tani
+ <section id="home" className="relative min-h-screen overflow-hidden">
+  <Image
+    src={heroImages[heroIndex]}
+    alt="Luxury Hotel"
+    fill
+    priority
+    sizes="100vw"
+    className="absolute inset-0 object-cover"
+  />
+
+  <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-black/70" />
+  <div className="absolute inset-0 bg-black/20" />
+
+  <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 pt-28 md:grid md:grid-cols-2 md:items-center md:gap-12">
+    <div>
+      <p className="mb-4 text-sm font-semibold uppercase tracking-[0.4em] text-yellow-400">
+        Welcome to Luxury Hotel
+      </p>
+
+      <h2 className="max-w-3xl text-5xl font-extrabold leading-tight text-white md:text-7xl">
+        Experience
+        <br />
+        Pure Luxury
+      </h2>
+
+      <p className="mt-6 max-w-xl text-lg leading-8 text-zinc-200">
+        Where elegance meets comfort, and every moment becomes unforgettable.
+      </p>
+
+      <div className="mt-8 flex flex-wrap gap-4">
+        <a
+          href="#rooms"
+          className="rounded-full bg-yellow-400 px-8 py-4 font-bold text-black transition hover:scale-105 hover:bg-yellow-300"
+        >
+          Explore Rooms
         </a>
+
+        <a
+          href="#kontakt"
+          className="rounded-full border border-white/30 px-8 py-4 font-bold text-white transition hover:scale-105 hover:bg-white/10"
+        >
+          Contact Us
+        </a>
+      </div>
+    </div>
+
+    <div className="mt-12 rounded-[2rem] border border-yellow-400/20 bg-black/75 p-8 shadow-[0_30px_80px_rgba(0,0,0,0.65)]
+    backdrop-blur-2xl md:mt-0">
+      <h3 className="text-center text-3xl font-extrabold tracking-wide text-yellow-400">
+        Book Your Stay
+      </h3>
+
+      <div className="mt-6 grid gap-4">
+        <div>
+          <label className="text-sm text-zinc-300">Check-in</label>
+          <input
+            type="date"
+            className="mt-2 w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none"
+          />
         </div>
-      </section>
+
+        <div>
+          <label className="text-sm text-zinc-300">Check-out</label>
+          <input
+            type="date"
+            className="mt-2 w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none"
+          />
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="text-sm text-zinc-300">Guests</label>
+            <select className="mt-2 w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none">
+              <option>2 Guests</option>
+              <option>3 Guests</option>
+              <option>4 Guests</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="text-sm text-zinc-300">Rooms</label>
+            <select className="mt-2 w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none">
+              <option>1 Room</option>
+              <option>2 Rooms</option>
+              <option>3 Rooms</option>
+            </select>
+          </div>
+        </div>
+
+        <a
+          href="#kontakt"
+          className="mt-4 rounded-xl bg-yellow-400 px-6 py-4 text-center font-bold text-black transition hover:bg-yellow-300"
+        >
+          Check Availability
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
       <section id="rooms" className="bg-zinc-900 px-6 py-24">
         <h2 className="mb-12 text-center text-5xl font-bold transition-all
@@ -121,9 +194,9 @@ clearInterval(interval);
 
         <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-1 md:grid-cols-3">
   {[
-    ["room1.jpg", "Deluxe Room", "129€ / Night", "King bed • WiFi • Breakfast"],
-    ["room2.jpg", "Sea View Suite", "189€ / Night", "Sea view • Balcony • Pool access"],
-    ["room3.jpg", "Premium Villa", "299€ / Night", "Private villa • Jacuzzi • VIP service"],
+    ["deluxe-new.jpg", "Deluxe Room", "129€ / Night", "King bed • WiFi • Breakfast"],
+    ["executive-new.jpg", "Sea View Suite", "189€ / Night", "Sea view • Balcony • Pool access"],
+    ["jakuzzi.jpg", "Premium Villa", "299€ / Night", "Private villa • Jacuzzi • VIP service"],
   ].map(([img, title, price, features]) => (
     <div key={title} className="group overflow-hidden rounded-3xl border border-zinc-700 bg-zinc-900 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-yellow-400 hover:shadow-yellow-400/20">
      <div className="relative h-64 w-full overflow-hidden">
@@ -155,7 +228,7 @@ clearInterval(interval);
       <section id="galeria" className="bg-black px-6 py-24">
         <h2 className="mb-12 text-center text-5xl font-bold transition-all duration-700 hover:scale-105">Gallery Highlights</h2>
         <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
-         {["room1.jpg", "room2.jpg", "room3.jpg"] .map((img) => (
+         {["gallery1.jpg", "gallery2.jpg", "gallery3.jpg", "gallery4.jpg", "gallery5.jpg", "gallery6.jpg", "gallery7.jpg", "gallery8.jpg",] .map((img) => (
           <div
           key={img}
           className="overflow-hidden rounded-3xl border border-zinc-700">
