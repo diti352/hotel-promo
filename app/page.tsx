@@ -8,7 +8,13 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [selectedImage,setSelectedImage] = useState<string | null>(null);
   const [mobileMenuOpen,setMobileMenuOpen] = useState(false);
-  const heroImages = ["/hero.jpg", "/room2.jpg", "/room3.jpg"];
+  const [bookingInfo, setBookingInfo] = useState({
+  checkIn: "",
+  checkOut: "",
+  guests: "2 Guests",
+  rooms: "1 Room",
+});
+  const heroImages = ["/hero.jpg", "/executive-new.jpg", "/deluxe-new.jpg"];
   const [heroIndex, setHeroIndex] = useState(0)
 
 useEffect(() => {
@@ -41,6 +47,8 @@ clearInterval(interval);
       phone: formData.get("phone"),
       checkIn: formData.get("checkIn"),
       checkOut: formData.get("checkOut"),
+      guests: formData.get("guests"),
+      rooms: formData.get ("rooms"),
     };
 
     const res = await fetch("/api/send", {
@@ -63,7 +71,14 @@ clearInterval(interval);
     ? "border-white/10 bg-black/70 shadow-2xl backdrop-blur-xl"
     : "border-white/5 bg-black/20 backdrop-blur-md"
 }`}>
-        <h1 className="text-2xl font-extrabold tracking-[0.3em] text-yellow-400">LUXURY HOTEL</h1>
+      <div className="leading-none">
+        <h1 className="text-3xl font-black tracking-[0.35em] text-yellow-400">
+          LUXORA
+        </h1>
+        <p className="mt-1 text-[11px] uppercase tracking-[0.45em] text-zinc-300">
+          HOTEL&RESORT
+        </p>
+      </div>
         <div className="hidden gap-8 md:flex">
           <a href="#home" className="hover:text-yellow-400">Home</a>
           <a href="#rooms" className="hover:text-yellow-400">Dhomat</a>
@@ -95,26 +110,29 @@ clearInterval(interval);
     fill
     priority
     sizes="100vw"
-    className="absolute inset-0 object-cover"
+    className="hero-zoom absolute inset-0 object-cover"
   />
 
   <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-black/70" />
   <div className="absolute inset-0 bg-black/20" />
 
   <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 pt-28 md:grid md:grid-cols-2 md:items-center md:gap-12">
-    <div>
+    <div
+    className="animate-[fadeUp_1s_ease-out_forwards">
       <p className="mb-4 text-sm font-semibold uppercase tracking-[0.4em] text-yellow-400">
         Welcome to Luxury Hotel
       </p>
 
-      <h2 className="max-w-3xl text-5xl font-extrabold leading-tight text-white md:text-7xl">
-        Experience
+      <h2 className="max-w-3xl text-5xl font-extrabold leading-tight text-white drop-shadow-[
+      0_0_20px_rgba(250,204,21,0.35)]">
+        EXPERIENCE
         <br />
-        Pure Luxury
+        PURE LUXURY
       </h2>
 
       <p className="mt-6 max-w-xl text-lg leading-8 text-zinc-200">
-        Where elegance meets comfort, and every moment becomes unforgettable.
+        Where timeless elegance meets world-class comfort,
+        creating unforgettable moments from the moment you arrive.
       </p>
 
       <div className="mt-8 flex flex-wrap gap-4">
@@ -122,14 +140,14 @@ clearInterval(interval);
           href="#rooms"
           className="rounded-full bg-yellow-400 px-8 py-4 font-bold text-black transition hover:scale-105 hover:bg-yellow-300"
         >
-          Explore Rooms
+          Discover More
         </a>
 
         <a
           href="#kontakt"
           className="rounded-full border border-white/30 px-8 py-4 font-bold text-white transition hover:scale-105 hover:bg-white/10"
         >
-          Contact Us
+          Book Now
         </a>
       </div>
     </div>
@@ -145,6 +163,8 @@ clearInterval(interval);
           <label className="text-sm text-zinc-300">Check-in</label>
           <input
             type="date"
+            value={bookingInfo.checkIn}
+onChange={(e) => setBookingInfo({ ...bookingInfo, checkIn: e.target.value })}
             className="mt-2 w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none"
           />
         </div>
@@ -152,7 +172,11 @@ clearInterval(interval);
         <div>
           <label className="text-sm text-zinc-300">Check-out</label>
           <input
-            type="date"
+            type="date"  
+            value={bookingInfo.checkOut}
+            onChange={(e) => 
+              setBookingInfo({ ...bookingInfo,checkOut: e.target.value })
+            }
             className="mt-2 w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none"
           />
         </div>
@@ -160,7 +184,12 @@ clearInterval(interval);
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="text-sm text-zinc-300">Guests</label>
-            <select className="mt-2 w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none">
+            <select
+            value={bookingInfo.guests}
+            onChange={(e) =>
+              setBookingInfo({ ...bookingInfo,guests: e.target.value })
+            }
+             className="mt-2 w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none">
               <option>2 Guests</option>
               <option>3 Guests</option>
               <option>4 Guests</option>
@@ -169,7 +198,12 @@ clearInterval(interval);
 
           <div>
             <label className="text-sm text-zinc-300">Rooms</label>
-            <select className="mt-2 w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none">
+            <select 
+            value={bookingInfo.rooms}
+            onChange={(e) =>
+              setBookingInfo({ ...bookingInfo,rooms: e.target.value})
+            }
+            className="mt-2 w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none">
               <option>1 Room</option>
               <option>2 Rooms</option>
               <option>3 Rooms</option>
@@ -177,20 +211,29 @@ clearInterval(interval);
           </div>
         </div>
 
-        <a
-          href="#kontakt"
-          className="mt-4 rounded-xl bg-yellow-400 px-6 py-4 text-center font-bold text-black transition hover:bg-yellow-300"
-        >
-          Check Availability
-        </a>
+        <button
+  type="button"
+  onClick={() =>
+    document.getElementById("kontakt")?.scrollIntoView({ behavior: "smooth" })
+  }
+  className="mt-4 rounded-xl bg-yellow-400 px-6 py-4 text-center font-bold text-black transition hover:bg-yellow-300"
+>
+  Check Availability
+  </button>
       </div>
     </div>
   </div>
 </section>
 
       <section id="rooms" className="bg-zinc-900 px-6 py-24">
+        <p className="mb-3 text-center text-sm font-semibold uppercase tracking-[0.35em] text yellow-400">
+          Our Rooms
+        </p>
         <h2 className="mb-12 text-center text-5xl font-bold transition-all
         duration-700 hover:scale-105">Luxury Accommodations</h2>
+        <div className="mx-auto mb-16 h-1 w-28 rounded-full bg-yellow-400">
+
+        </div>
 
         <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-1 md:grid-cols-3">
   {[
@@ -198,7 +241,9 @@ clearInterval(interval);
     ["executive-new.jpg", "Sea View Suite", "189€ / Night", "Sea view • Balcony • Pool access"],
     ["jakuzzi.jpg", "Premium Villa", "299€ / Night", "Private villa • Jacuzzi • VIP service"],
   ].map(([img, title, price, features]) => (
-    <div key={title} className="group overflow-hidden rounded-3xl border border-zinc-700 bg-zinc-900 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-yellow-400 hover:shadow-yellow-400/20">
+    <div key={title} className="group overflow-hidden rounded-3xl border 
+    border-zinc-700 bg-zinc-900 shadow-xl transition-all duration-300 
+    hover:-translate-y-3 hover:border-yellow-400/60 hover:shadow-2xl hover:shadow-yellow-500/30">
      <div className="relative h-64 w-full overflow-hidden">
   <Image
     src={`/${img}`}
@@ -224,6 +269,53 @@ clearInterval(interval);
   ))}
         </div>
       </section>
+      <section id="about" className="bg-black px-6 py-24">
+  <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
+
+    <div>
+      <img
+        src="/gallery5.jpg"
+        className="rounded-3xl shadow-2xl"
+      />
+    </div>
+
+    <div>
+      <p className="mb-3 tracking-[0.4em] text-yellow-400 uppercase">
+        About Us
+      </p>
+
+      <h2 className="text-5xl font-bold">
+        Luxury Beyond
+        <br />
+        Expectations
+      </h2>
+
+      <p className="mt-6 text-zinc-300 leading-8">
+        Our hotel combines timeless elegance with world-class hospitality,
+        offering unforgettable experiences, breathtaking views and exceptional
+        comfort for every guest.
+      </p>
+
+      <div className="mt-8 flex gap-8">
+        <div>
+          <h3 className="text-4xl font-bold text-yellow-400">15+</h3>
+          <p>Years Experience</p>
+        </div>
+
+        <div>
+          <h3 className="text-4xl font-bold text-yellow-400">120+</h3>
+          <p>Luxury Rooms</p>
+        </div>
+
+        <div>
+          <h3 className="text-4xl font-bold text-yellow-400">50k+</h3>
+          <p>Happy Guests</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
       <section id="galeria" className="bg-black px-6 py-24">
         <h2 className="mb-12 text-center text-5xl font-bold transition-all duration-700 hover:scale-105">Gallery Highlights</h2>
@@ -344,9 +436,16 @@ clearInterval(interval);
           <input name="name" required placeholder="Emri juaj" className="rounded-xl bg-zinc-700 p-4" />
           <input name="email" type="email" required placeholder="Email" className="rounded-xl bg-zinc-700 p-4" />
           <input name="phone" required placeholder="Numri i telefonit" className="rounded-xl bg-zinc-700 p-4" />
-          <input name="checkIn" type="date" required className="rounded-xl bg-zinc-700 p-4" />
-          <input name="checkOut" type="date" required className="rounded-xl bg-zinc-700 p-4" />
-
+          <input name="checkIn" type="date" required 
+          value={bookingInfo.checkIn} onChange={(e) => setBookingInfo({ ...bookingInfo,checkIn: e.target.value})} 
+          className="rounded-xl bg-zinc-700 p-4" />
+          <input name="checkOut" type="date" required value={bookingInfo.checkOut} onChange={(e) =>
+    setBookingInfo({ ...bookingInfo, checkOut: e.target.value })
+  } className="rounded-xl bg-zinc-700 p-4" />
+<input type="hidden" name="guests"
+value={bookingInfo.guests} />
+<input type="hidden" name="rooms"
+value={bookingInfo.rooms} />
           <button className="mt-4 rounded-full bg-yellow-400 px-8 py-4 font-bold text-black hover:bg-yellow-300">
             Konfirmo Rezervimin
           </button>

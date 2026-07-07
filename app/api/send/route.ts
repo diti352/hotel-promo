@@ -10,16 +10,17 @@
             },
         });
         await transporter.sendMail({
-           from:"ditiendrit405@gmail.com",
-           to: "ditiendrit405@gmail.com",
+           from: process.env.EMAIL_USER,
+           to: process.env.EMAIL_USER,
            subject: "Rezervim i ri nga website",
            text:`
            Emri: ${body.name}
            Email: ${body.email}
            Telefoni: ${body.phone}
-           Check-in:${body.checkIn}
-           Check-out:${body.checkOut}
-           ,`
+           Check-in: ${body.checkIn}
+           Check-out: ${body.checkOut}
+           Guests: ${body.guests}
+           Rooms: ${body.rooms}`
         });
         return NextResponse.json({ success:true});
     }
