@@ -14,6 +14,7 @@ export default function Home() {
   guests: "2 Guests",
   rooms: "1 Room",
 });
+const [isSending, setIsSending] = useState(false);
   const heroImages = ["/hero.jpg", "/executive-new.jpg", "/deluxe-new.jpg"];
   const [heroIndex, setHeroIndex] = useState(0)
 
@@ -37,7 +38,9 @@ return() =>
 clearInterval(interval);
 }, []);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const form = e.currentTarget;
     e.preventDefault();
+    setIsSending(true);
 
     const formData = new FormData(e.currentTarget);
 
@@ -59,9 +62,17 @@ clearInterval(interval);
 
     if (res.ok) {
       alert("Rezervimi u dergua me sukses!"); 
+      form.reset();
+      setBookingInfo({
+        checkIn: "",
+        checkOut: "",
+        guests: "2 Guests",
+        rooms: "1 Room",
+      });
     } else {
       alert("Gabim gjate dergimit.");
     }
+setIsSending(false);
   };
 
   return (
@@ -446,8 +457,13 @@ onChange={(e) => setBookingInfo({ ...bookingInfo, checkIn: e.target.value })}
 value={bookingInfo.guests} />
 <input type="hidden" name="rooms"
 value={bookingInfo.rooms} />
-          <button className="mt-4 rounded-full bg-yellow-400 px-8 py-4 font-bold text-black hover:bg-yellow-300">
-            Konfirmo Rezervimin
+          <button 
+          type ="submit" 
+          disabled={isSending}
+          className="mt-4 rounded-full bg-yellow-400 px-8 py-4 
+          font-bold text-black hover:bg-yellow-300 disabled:opacity-50">
+            {isSending ? "Duke derguar..." :
+            "Konfirmo Rezervimin"}
           </button>
         </form>
         <div className="mx-auto mt-12 max-w-5xl overflow-hidden rounded-3xl border border-zinc-800">
