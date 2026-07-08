@@ -400,7 +400,7 @@ onChange={(e) => setBookingInfo({ ...bookingInfo, checkIn: e.target.value })}
           >
             <img
             src={selectedImage}
-            alt="Selected gallery image"
+            alt="Selected gallery image "
             className="max-h-[90vh] max-w-[90vw] rounded-3xl border border-yellow-400 object-contain"
             />
           </div>
