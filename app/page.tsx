@@ -114,7 +114,7 @@ setIsSending(false);
     <main className="min-h-screen bg-black text-white">
       <nav className={`fixed top-0 z-50 flex w-full items-center justify-between border-b px-8 py-5 backdrop-blur-xl transition-all duration-300 ${
   scrolled
-    ? "border<-white/10 bg-black/70 shadow-2xl backdrop-blur-xl"
+    ? "border-white/10 bg-black/70 shadow-2xl backdrop-blur-xl"
     : "border-white/5 bg-black/20 backdrop-blur-md"
 }`}>
      
@@ -175,7 +175,7 @@ setIsSending(false);
 
   <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 pt-28 md:grid md:grid-cols-2 md:items-center md:gap-12">
     <div
-    className="animate-[fadeUp_1s_ease-out_forwards">
+    className="animate-[fadeUp_1s_ease-out_forwards]:">
       <p className="mb-4 text-sm font-semibold uppercase tracking-[0.4em] text-yellow-400">
         Welcome to Luxury Hotel
       </p>
@@ -285,7 +285,7 @@ onChange={(e) => setBookingInfo({ ...bookingInfo, checkIn: e.target.value })}
 </section>
 
       <section id="rooms" className="bg-zinc-900 px-6 py-24">
-        <p className="mb-3 text-center text-sm font-semibold uppercase tracking-[0.35em] text yellow-400">
+        <p className="mb-3 text-center text-sm font-semibold uppercase tracking-[0.35em] text-yellow-400">
           Our Rooms
         </p>
         <h2 className="mb-12 text-center text-5xl font-bold transition-all
@@ -334,6 +334,7 @@ onChange={(e) => setBookingInfo({ ...bookingInfo, checkIn: e.target.value })}
     <div>
       <img
         src="/gallery5.jpg"
+        alt="Luxury Hotel"
         className="rounded-3xl shadow-2xl"
       />
     </div>
@@ -384,7 +385,7 @@ onChange={(e) => setBookingInfo({ ...bookingInfo, checkIn: e.target.value })}
           key={img}
           className="overflow-hidden rounded-3xl border border-zinc-700">
             <img
-            src={`/${img}`} onClick={() => setSelectedImage(`/${img}`)}
+            src={`/${img}`} alt="Gallery image" onClick={() => setSelectedImage(`/${img}`)}
             className="h-80 w-full object-cover transition duration-700 hover:scale-110 hover:brightness-110"
             />
         </div>
@@ -399,6 +400,7 @@ onChange={(e) => setBookingInfo({ ...bookingInfo, checkIn: e.target.value })}
           >
             <img
             src={selectedImage}
+            alt="Selected gallery image"
             className="max-h-[90vh] max-w-[90vw] rounded-3xl border border-yellow-400 object-contain"
             />
           </div>
