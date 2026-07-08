@@ -15,8 +15,14 @@ export default function Home() {
   rooms: "1 Room",
 });
 const [isSending, setIsSending] = useState(false);
+const [message, setMessage] = 
+useState("");
+const [messageType, setMessageType] =
+useState<"success" | "error" | "">("");
   const heroImages = ["/hero.jpg", "/executive-new.jpg", "/deluxe-new.jpg"];
   const [heroIndex, setHeroIndex] = useState(0)
+  const today = new 
+  Date().toISOString().split("T")[0];
 
 useEffect(() => {
   const handleScroll = () => {
@@ -53,7 +59,26 @@ clearInterval(interval);
       guests: formData.get("guests"),
       rooms: formData.get ("rooms"),
     };
-
+if (String(body.checkIn) < today) { 
+  setMessage("Check-in date cannot be in the past.");
+  setMessageType("error");
+        setTimeout(() => {
+        setMessage("");
+        setMessageType("");
+      }, 4000);
+  setIsSending(false);
+  return;
+}
+if (String(body.checkOut) < String (body.checkIn)) {
+  setMessage("Check-out must be after Check-in.");
+  setMessageType("error");
+  setIsSending(false);
+        setTimeout(() => {
+        setMessage("");
+        setMessageType("");
+      }, 4000);
+  return;
+}
     const res = await fetch("/api/send", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -61,7 +86,12 @@ clearInterval(interval);
     });
 
     if (res.ok) {
-      alert("Rezervimi u dergua me sukses!"); 
+      setMessage("Rezervimi u dergua me sukses!"); 
+      setMessageType("success");
+      setTimeout(() => {
+        setMessage("");
+        setMessageType("");
+      }, 4000);
       form.reset();
       setBookingInfo({
         checkIn: "",
@@ -70,7 +100,12 @@ clearInterval(interval);
         rooms: "1 Room",
       });
     } else {
-      alert("Gabim gjate dergimit.");
+      setMessage("Gabim gjate dergimit.");
+      setMessageType("error");
+            setTimeout(() => {
+        setMessage("");
+        setMessageType("");
+      }, 4000);
     }
 setIsSending(false);
   };
@@ -79,17 +114,28 @@ setIsSending(false);
     <main className="min-h-screen bg-black text-white">
       <nav className={`fixed top-0 z-50 flex w-full items-center justify-between border-b px-8 py-5 backdrop-blur-xl transition-all duration-300 ${
   scrolled
-    ? "border-white/10 bg-black/70 shadow-2xl backdrop-blur-xl"
+    ? "border<-white/10 bg-black/70 shadow-2xl backdrop-blur-xl"
     : "border-white/5 bg-black/20 backdrop-blur-md"
 }`}>
-      <div className="leading-none">
-        <h1 className="text-3xl font-black tracking-[0.35em] text-yellow-400">
-          LUXORA
-        </h1>
-        <p className="mt-1 text-[11px] uppercase tracking-[0.45em] text-zinc-300">
-          HOTEL&RESORT
-        </p>
-      </div>
+     
+     <div className="flex items-center gap-3">
+  <Image
+    src="/logo.png"
+    alt="Hotel Logo"
+    width={50}
+    height={50}
+    className="h-[50px] w-[50px] rounded-full object-cover"
+  />
+
+  <div className="leading-none">
+    <h1 className="text-3xl font-black tracking-[0.35em] text-yellow-400">
+      LUXORA
+    </h1>
+    <p className="mt-1 text-[11px] uppercase tracking-[0.45em] text-zinc-300">
+      HOTEL & RESORT
+    </p>
+  </div>
+</div>
         <div className="hidden gap-8 md:flex">
           <a href="#home" className="hover:text-yellow-400">Home</a>
           <a href="#rooms" className="hover:text-yellow-400">Dhomat</a>
@@ -174,6 +220,7 @@ setIsSending(false);
           <label className="text-sm text-zinc-300">Check-in</label>
           <input
             type="date"
+            min={today}
             value={bookingInfo.checkIn}
 onChange={(e) => setBookingInfo({ ...bookingInfo, checkIn: e.target.value })}
             className="mt-2 w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none"
@@ -184,6 +231,7 @@ onChange={(e) => setBookingInfo({ ...bookingInfo, checkIn: e.target.value })}
           <label className="text-sm text-zinc-300">Check-out</label>
           <input
             type="date"  
+            min={bookingInfo.checkIn || today}
             value={bookingInfo.checkOut}
             onChange={(e) => 
               setBookingInfo({ ...bookingInfo,checkOut: e.target.value })
@@ -442,15 +490,25 @@ onChange={(e) => setBookingInfo({ ...bookingInfo, checkIn: e.target.value })}
 
       <section id="kontakt" className="bg-zinc-900 px-6 py-24">
         <h2 className="mb-12 text-center text-5xl font-bold">Rezervo Qendrimin</h2>
-
+{message && (
+  <div
+    className={`mb-6 rounded-xl p-4 text-center font-semibold ${
+      messageType === "success"
+        ? "bg-green-600 text-white"
+        : "bg-red-600 text-white"
+    }`}
+  >
+    {message}
+  </div>
+)}
         <form onSubmit={handleSubmit} className="mx-auto grid max-w-3xl gap-4 rounded-3xl bg-zinc-800 p-6">
           <input name="name" required placeholder="Emri juaj" className="rounded-xl bg-zinc-700 p-4" />
           <input name="email" type="email" required placeholder="Email" className="rounded-xl bg-zinc-700 p-4" />
           <input name="phone" required placeholder="Numri i telefonit" className="rounded-xl bg-zinc-700 p-4" />
-          <input name="checkIn" type="date" required 
+          <input name="checkIn" type="date" min={today} required 
           value={bookingInfo.checkIn} onChange={(e) => setBookingInfo({ ...bookingInfo,checkIn: e.target.value})} 
           className="rounded-xl bg-zinc-700 p-4" />
-          <input name="checkOut" type="date" required value={bookingInfo.checkOut} onChange={(e) =>
+          <input name="checkOut" type="date" min={bookingInfo.checkIn || today} required value={bookingInfo.checkOut} onChange={(e) =>
     setBookingInfo({ ...bookingInfo, checkOut: e.target.value })
   } className="rounded-xl bg-zinc-700 p-4" />
 <input type="hidden" name="guests"
